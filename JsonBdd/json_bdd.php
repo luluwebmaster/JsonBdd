@@ -204,7 +204,11 @@ class JBDD
 						{
 							foreach($settings['where'] AS $key2 => $value2)
 							{
-								if(array_key_exists($key2, $value) AND strstr($value[$key2], $value2))
+								if(isset($settings['whereLike']) AND $settings['whereLike'] == true AND array_key_exists($key2, $value) AND strstr($value[$key2], $value2))
+								{
+									$listeResults[$key] = $bddValue[$key];
+								}
+								elseif(array_key_exists($key2, $value) AND $value[$key2] == $value2)
 								{
 									$listeResults[$key] = $bddValue[$key];
 								}
@@ -286,12 +290,16 @@ class JBDD
 				//Avec des parametres de recherches
 				elseif(isset($settings['where']) AND is_array($settings['where']))
 				{
-					$listeResults = array();
+					$listeValue = array();
 					foreach($bddValue AS $key => $value)
 					{
 						foreach($settings['where'] AS $key2 => $value2)
 						{
-							if(array_key_exists($key2, $value) AND strstr($value[$key2], $value2))
+							if(isset($settings['whereLike']) AND $settings['whereLike'] == true AND array_key_exists($key2, $value) AND strstr($value[$key2], $value2))
+							{
+								$listeValue[$key] = $bddValue[$key];
+							}
+							elseif(array_key_exists($key2, $value) AND $value[$key2] == $value2)
 							{
 								$listeValue[$key] = $bddValue[$key];
 							}
@@ -357,12 +365,16 @@ class JBDD
 				//Avec des parametres de recherches
 				elseif(isset($settings['where']) AND is_array($settings['where']))
 				{
-					$listeResults = array();
+					$listeValue = array();
 					foreach($bddValue AS $key => $value)
 					{
 						foreach($settings['where'] AS $key2 => $value2)
 						{
-							if(array_key_exists($key2, $value) AND strstr($value[$key2], $value2))
+							if(isset($settings['whereLike']) AND $settings['whereLike'] == true AND array_key_exists($key2, $value) AND strstr($value[$key2], $value2))
+							{
+								$listeValue[$key] = $bddValue[$key];
+							}
+							elseif(array_key_exists($key2, $value) AND $value[$key2] == $value2)
 							{
 								$listeValue[$key] = $bddValue[$key];
 							}
